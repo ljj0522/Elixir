@@ -133,7 +133,7 @@ function main_menu() {
     echo "2. 查看Docker日志"
     echo "3. 删除Elixir Docker容器"
     echo "4. 设置自动更新检查"
-    read -p "请输入选项（1-3）: " OPTION
+    read -p "请输入选项（1-4）: " OPTION
 
     case $OPTION in
     1) install_node ;;
