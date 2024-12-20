@@ -38,7 +38,7 @@ function install_node() {
 
     # 将环境变量保存到 validator.env 文件
     cat <<EOF > validator.env
-ENV=testnet-3
+ENV=mainnet
 
 STRATEGY_EXECUTOR_IP_ADDRESS=${ip_address}
 STRATEGY_EXECUTOR_DISPLAY_NAME=${validator_name}
@@ -52,22 +52,26 @@ EOF
     docker pull elixirprotocol/validator:v3
 
     # 提示用户选择平台
-    read -p "您是否在Apple/ARM架构上运行？(y/n): " is_arm
-
-    if [[ "$is_arm" == "y" ]]; then
-        # 在Apple/ARM架构上运行
-        docker run -it -d \
-          --env-file validator.env \
-          --name elixir \
-          --platform linux/amd64 \
-          elixirprotocol/validator:v3
-    else
-        # 默认运行
-        docker run -it -d \
+    # read -p "您是否在Apple/ARM架构上运行？(y/n): " is_arm
+    docker run -it -d \
           --env-file validator.env \
           --name elixir \
           elixirprotocol/validator:v3
-    fi
+          
+    # if [[ "$is_arm" == "y" ]]; then
+    #     # 在Apple/ARM架构上运行
+    #     docker run -it -d \
+    #       --env-file validator.env \
+    #       --name elixir \
+    #       --platform linux/amd64 \
+    #       elixirprotocol/validator:v3
+    # else
+    #     # 默认运行
+    #     docker run -it -d \
+    #       --env-file validator.env \
+    #       --name elixir \
+    #       elixirprotocol/validator:v3
+    # fi
 }
 
 # 查看Docker日志功能
